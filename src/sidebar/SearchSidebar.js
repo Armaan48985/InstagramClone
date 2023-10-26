@@ -8,13 +8,8 @@ function SearchSidebar({sidebarOpen}) {
 
   const [data, setData] = useState(dummyData)
 
-
-
- const handleRemove = (id) => {
+  const handleRemove = (id) => {
   const updatedData = DummyData.filter((item) => item.id !== id);
-
-  console.log(dummyData)
-  console.log(updatedData)
 
   setData(updatedData)
 };

@@ -1,9 +1,9 @@
-﻿import React from "react";
-import {AiOutlineHome} from 'react-icons/ai'
+﻿import React, { useState, useEffect } from "react";
+import { AiOutlineHome } from "react-icons/ai";
 import { AiFillHome } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdOutlineExplore } from "react-icons/md";
-import {MdExplore} from "react-icons/md"
+import { MdExplore } from "react-icons/md";
 import { BsCameraReels } from "react-icons/bs";
 import { BsCameraReelsFill } from "react-icons/bs";
 import { PiMessengerLogoBold } from "react-icons/pi";
@@ -16,16 +16,16 @@ export const sidebarData = [
   {
     name: "Home",
     activeLogo: <AiFillHome />,
-    logo: <AiOutlineHome/>,
+    logo: <AiOutlineHome />,
     path: "home",
-    id: 1
+    id: 1,
   },
   {
     name: "Search",
     logo: <AiOutlineSearch />,
     activeLogo: <AiOutlineSearch />,
     click: "search-sidebar",
-    id: 2
+    id: 2,
   },
   {
     name: "Explore",
@@ -33,7 +33,7 @@ export const sidebarData = [
     activeLogo: <MdExplore />,
     path: "explore",
     click: null,
-    id: 3
+    id: 3,
   },
   {
     name: "Reels",
@@ -41,7 +41,7 @@ export const sidebarData = [
     activeLogo: <BsCameraReelsFill />,
     path: "reel",
     click: null,
-    id: 4
+    id: 4,
   },
   {
     name: "Messages",
@@ -49,24 +49,20 @@ export const sidebarData = [
     activeLogo: <FaFacebookMessenger />,
     path: "message",
     click: null,
-    id: 5
+    id: 5,
   },
   {
     name: "Notifications",
     logo: <AiOutlineHeart />,
     activeLogo: <AiFillHeart />,
     click: "notification-sidebar",
-    id: 6
-
+    id: 6,
   },
   {
     name: "Create",
     logo: <FiPlusSquare />,
     activeLogo: <FiPlusSquare />,
     click: null,
-    id: 7
+    id: 7,
   },
 ];
-
-
-

@@ -23,22 +23,27 @@ const animeCharacters = [
     {
       name: 'NarutoUzumaki',
       imageUrl: img1,
+      followed: true
     },
     {
       name: 'SakuraHaruno',
       imageUrl: img2,
+      followed: false
     },
     {
       name: 'SasukeUchiha',
       imageUrl: img3,
+      followed: false
     },
     {
       name: 'Goku',
       imageUrl: img4,
+      followed: false
     },
     {
       name: 'Vegeta',
       imageUrl: img5,
+      followed: false
     },
     {
       name: 'LuffyMonkeyD.',

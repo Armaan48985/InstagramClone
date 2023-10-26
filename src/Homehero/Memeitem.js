@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useRef, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa";
@@ -18,10 +18,61 @@ function Memeitem({
     comments,
     likes,
     caption,
-    setShowpostSetting
+    setShowpostSetting,
+    setComment
   }){
     const [savedpost, setSavepost] = useState(false)
     const [likedpost, setLikedpost] = useState(false)
+    const [likedComment, setLikedComment] = useState(false)
+    const [postStyle, setPostStyle] = useState({})
+    const [addedPostStyle, setAddedPostStyle] = useState({})
+    const [posttxtt, setPosttxtt] = useState('')
+    const [puttedcomment, setPuttedcomment] = useState('')
+
+    const showPostTxt = (e) => {
+      // console.log(posttxtt)
+      if(posttxtt !== ''){
+        // setPostStyle({display: "none"})
+        // console.log("empty")
+        // console.log("working") 
+        setPostStyle({display: "block"})
+      } 
+      setPosttxtt(e.target.value)
+
+    }
+
+
+    useEffect(() => {
+      // console.log(posttxtt)
+      if(posttxtt == ''){
+        // setPostStyle({display: "none"})
+        // console.log("empty")
+        // console.log("working") 
+        
+        setPostStyle({display: "none"})
+
+      }   
+    }, [posttxtt])
+
+
+    const showAddedPost = (event) => {
+      // document.createElement(div)
+      if(event.type == 'click'){
+        setAddedPostStyle({display: "flex"})
+      setPuttedcomment(posttxtt)
+      setPosttxtt('')
+      }
+      
+    }
+    
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter') {
+        // Call your like function when the Enter key is pressed
+        setAddedPostStyle({display: "flex"})
+        setPuttedcomment(posttxtt)
+        setPosttxtt('')
+      }
+    }
 
     return (
       <div className="meme-container">
@@ -44,7 +95,7 @@ function Memeitem({
               <span className="meme-button-heart" onClick={() => setLikedpost(e => !e)}>
                 {likedpost ? <img className="red-heart" src={redHeart}/> :  <FaRegHeart />}
               </span>
-              <span className="meme-button-comment">
+              <span className="meme-button-comment" onClick={() => setComment(true)}>
                 <FaRegComment />
               </span>
             </div>
@@ -59,9 +110,24 @@ function Memeitem({
             {caption}...
           </p>
           <p className="comment">View all {comments} comments</p>
+
+          <div className="added-comment" style={addedPostStyle}>
+              <div>
+              <h4>_armaan_23___</h4>
+                <p>{puttedcomment}</p>
+              </div>
+                <span onClick={() => setLikedComment(e => !e)}>
+                {likedComment ? <img className="red-heart-comment" src={redHeart}/> :  <FaRegHeart />}
+              </span>
+            </div>
+
           <div className="add-comment">
-            <p>Add a comment...</p>
-            <span>
+            <input className="comment-input"  onKeyDown={handleKeyPress} placeholder="Add a comment..." value={posttxtt} type="text" onChange={showPostTxt}/>
+            
+          
+
+            <span className="flex">
+              <p className="comment-post-txt" style={postStyle} onClick={showAddedPost}>Post</p>
               <GrEmoji />
             </span>
           </div>

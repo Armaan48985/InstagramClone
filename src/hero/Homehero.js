@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useRef, useState } from "react";
 import storyData from "../Homehero/storydata";
 // import img from '../storyImg/images (1).jpeg'
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
@@ -16,7 +16,8 @@ import PostSetting from "../Homehero/postSetting";
 import { GoAlert } from "react-icons/go";
 import MemeItem from "../Homehero/Memeitem";
 import Story from "../Homehero/Story";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+import Comment from "../Homehero/comment"
 
 function Homehero() {
   const [story, setStory] = useState(0);
@@ -24,7 +25,12 @@ function Homehero() {
   const [showrightArrow, setShowrightArrow] = useState(true);
   const [showpostSetting, setShowpostSetting] = useState(false);
   // const [storydataArray, setStorydataArray] = useState(storyData);
-  const [storySection, setStorySection] = useState(false);
+  const [storySection, setStorySection] = useState(false); 
+  const [followed, setFollowed] = useState(false)
+  const [comment, setComment] = useState(false)
+  
+
+
 
   const storyRight = () => {
     // Update the style of the element
@@ -103,7 +109,7 @@ function Homehero() {
 
         {showleftArrow && (
           <span className="left-arrow" onClick={leftarrowHandle}>
-            <MdOutlineKeyboardArrowLeft />
+            <MdOutlineKeyboardArrowLeft/>
           </span>
         )}
         {showrightArrow && (
@@ -118,6 +124,7 @@ function Homehero() {
               key={index}
               {...data}
               setShowpostSetting={setShowpostSetting}
+              setComment={setComment}
             />
           ))}
         </div>
@@ -139,7 +146,12 @@ function Homehero() {
           <span>See all</span>
         </div>
 
-        {storyData.slice(0, 5).map(({ name, imageUrl }) => {
+       
+
+
+
+        {storyData.slice(0, 5).map(({ name, imageUrl, followed }) => {
+
           return (
             <div className="suggestion-container">
               <div className="flex">
@@ -150,7 +162,7 @@ function Homehero() {
                 </div>
               </div>
 
-              <p className="follow-btn">Follow</p>
+              <p className="follow-btn">follow</p>
             </div>
           );
         })}
@@ -160,6 +172,10 @@ function Homehero() {
       )}
         {storySection && (
         <Story setStorySection={setStorySection}/>
+      )}
+
+{comment && (
+        <Comment setComment={setComment}/>
       )}
     </div>
   );

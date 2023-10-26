@@ -2,7 +2,7 @@
 import {RxCross1} from 'react-icons/rx'
 
 function story({setStorySection}) {
-    console.log("lkjsdf")
+    // console.log("lkjsdf")
   return (
     <div className='story-section'>
         <h1>Stories</h1>

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { TbClick } from "react-icons/tb";
 import SearchSidebar from "./sidebar/SearchSidebar";
 import NotificationSidebar from "./sidebar/notificationSidebar";
-
+import MessageSidebar from "./sidebar/messageSidebar";
 
 
 function Sidebar() {
@@ -20,6 +20,7 @@ function Sidebar() {
   const [showMenu, setShowMenu] = useState(false)
   // const [showActiveLogo, setShowActiveLogo] = useState(false)
   const [searchbarOpen, setSearchbarOpen] = useState(false)
+  const [messageSidebarOpen, setMessageSidebarOpen] = useState(false)
   const [notificationbarOpen, setNotificationbarOpen] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -28,19 +29,29 @@ function Sidebar() {
 
   useEffect(() => {
     // Check if either searchbar or notificationbar is open, and update sidebar accordingly
-    setSidebarOpen(searchbarOpen || notificationbarOpen);
-  }, [searchbarOpen, notificationbarOpen]);
+    setSidebarOpen(searchbarOpen || notificationbarOpen || messageSidebarOpen);
+  }, [searchbarOpen, notificationbarOpen, messageSidebarOpen ]);
 
   const handlesidebar = (id) => {
     if(id === 2){
       setSearchbarOpen((e) => !e)
       setNotificationbarOpen(false)
-    }else if(id === 6){
+      // setMessageSidebarOpen(false)
+    }
+    else if(id === 6){
       setNotificationbarOpen((e) => !e)
       setSearchbarOpen(false)
-    }else{
+      // setMessageSidebarOpen(false)
+    }
+    else if(id === 5){
+      setMessageSidebarOpen((e) => !e)
+      setSearchbarOpen(false)
+      setNotificationbarOpen(false)
+    }
+    else{
       setNotificationbarOpen(false)
       setSearchbarOpen(false)
+      setMessageSidebarOpen(false)
     }
   }
 
@@ -48,11 +59,11 @@ function Sidebar() {
  
   return (
     <>
-    <div className="sidebar-section section" style={sidebarOpen ? {border: "none"} : {}}>
+    <div className="sidebar-section section">
       <div className="sidebar">
         <img src={sidebarOpen ? SmallLogo : FullLogo} width={sidebarOpen ? "30px" : "115px"} className="logo"/>
 
-        <div className="sidebar-main">
+        <div className="sidebar-main" style={sidebarOpen ? {width: "60px"} : {}}>
           {sidebarData.map(({ name, logo, path, id}) => {
           return (
            <Link to={path}>
@@ -64,22 +75,19 @@ function Sidebar() {
              );
               })}
            <Link to='profile'>
-           <div className="name profile">
-              <img className="ppf" src={ppf}/>
-              <h4 className={`text-container ${!sidebarOpen ? 'visible' : 'hidden'}`}>Profile</h4>
-            </div>
+              <div className="name profile">
+                <img className="ppf" src={ppf}/>
+                <h4 className={`text-container ${!sidebarOpen ? 'visible' : 'hidden'}`}>Profile</h4>
+              </div>
            </Link>
             
         </div>
       </div>
   
-  {showMenu && (
-    <Menubar/>
-  )
-  }
-
- 
-
+      {showMenu && (
+        <Menubar/>
+      )
+      }
       <div className="menu" onClick={() => setShowMenu(!showMenu)}>
       <a className="menu-icon"><RiMenuLine/></a>
       <h4 className={`text-container ${!sidebarOpen ? 'visible' : 'hidden'}`}>More</h4>
@@ -88,7 +96,9 @@ function Sidebar() {
     </div>
 
 
-<NotificationSidebar sidebarOpen={notificationbarOpen}/>
+  <NotificationSidebar sidebarOpen={notificationbarOpen}/>
+  <MessageSidebar sidebarOpen={messageSidebarOpen}/>
+
 </>
   );
 }
