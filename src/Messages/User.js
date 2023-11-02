@@ -17,9 +17,7 @@ import UserMain from "./UserMain";
 
 
 function User() {
- 
   return (
-    
        <Routes>
           <Route path="person1" element={<Person1 />} />
           <Route path="person2" element={<Person2 />} />

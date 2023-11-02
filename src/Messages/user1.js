@@ -15,6 +15,7 @@ function User1() {
     localStorage.setItem(`chatLogData-${userId}`, JSON.stringify(chatLog));
   }, [chatLog]);
 
+  console.log(chatLog)
   
   return (
     <>

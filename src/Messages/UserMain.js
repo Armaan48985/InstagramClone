@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect, useRef } from "react";
 import { IoCallOutline } from "react-icons/io5";
 import { BiVideo } from "react-icons/bi";
 import { AiOutlineInfoCircle } from "react-icons/ai";
@@ -9,6 +9,8 @@ import { FiHeart } from "react-icons/fi";
 import dummyData from "../sidebar/SearchSidebarData";
 import UserChat from './UserChat'
 import RedOptions from "./redOptions";
+import Display from './display'
+import redHeart from '../images/redHeart.png'
 
 function UserMain(props) {
   // console.log(props.personIndex)
@@ -66,6 +68,26 @@ function UserMain(props) {
   useEffect(() => {
     localStorage.setItem("chatLog", JSON.stringify(chatLog));
   }, [chatLog]);
+ 
+
+
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const fileInputRef = useRef(); // Create a ref for the input element
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+  };
+
+  const handleClick = () => {
+    // Trigger a click on the hidden file input element
+    fileInputRef.current.click();
+  };
+
+  const sendHeart = () => {
+    setChatLog([...chatLog, { text: <FiHeart/>, sender: 'user'}]);
+  }
 
   return (
     <>
@@ -118,10 +140,10 @@ function UserMain(props) {
                 <BsMic />
               </span>
               <span>
-                <GoFileMedia />
+                <GoFileMedia  onClick={handleClick}/>
               </span>
               <span>
-                <FiHeart />
+                <FiHeart  onClick={sendHeart} />
               </span>
             </div>
           ) : (
@@ -129,6 +151,17 @@ function UserMain(props) {
           )}
         </div>
       </div>
+
+      <div>
+            {/* Hidden file input */}
+            <input
+              type="file"
+              ref={fileInputRef} // Ref to access the input element
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+            />
+            {selectedFile && <p>Selected file: {selectedFile.name}</p>}
+        </div>
 
       {showRedOption && <RedOptions closeRedOptions={closeRedOptions} setChatLog={setChatLog}/>}
     </>

@@ -6,7 +6,7 @@ import dummyData from "./SearchSidebarData.js";
 import { BsPencilSquare } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import User from "../Messages/User.js";
-import display from "../Messages/display.js";
+import Display from "../Messages/display.js";
 import UserMain from "../Messages/UserMain.js";
 import NewMessage from "../Messages/NewMessage.js";
 
@@ -14,6 +14,7 @@ function SearchSidebar({ sidebarOpen }) {
   const [data, setData] = useState(dummyData);
   const [activeIndex, setActiveIndex] = useState(-1); // Initialize to -1 (no active element)
   const [newMsgBox, setNewMsgBox] = useState(false)
+
 
   const handleItemClick = (index) => {
     setActiveIndex(index);
@@ -28,6 +29,9 @@ function SearchSidebar({ sidebarOpen }) {
 
   return (
     <>
+    <div style={{display: "none"}}>
+      <Display openNewMsgBox={openNewMsgBox}/>
+    </div>
       <div
         className="searchsidebar-container msg-sidebar-container"
         style={sidebarOpen ? { left: "6rem" } : {}}
@@ -69,6 +73,7 @@ function SearchSidebar({ sidebarOpen }) {
             })}
           </div>
         </div>
+      
       </div>
 
       {newMsgBox && <NewMessage closeNewMsgBox={closeNewMsgBox}/>}
