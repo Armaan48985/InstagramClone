@@ -4,34 +4,43 @@ import {BiDotsHorizontalRounded} from 'react-icons/bi'
 import {IoReturnUpBackOutline} from 'react-icons/io5'
 import {GrEmoji} from 'react-icons/gr'
 
-function UserChat({chatLog}) {
+function UserChat({chatLog, setChatLog}) {
   const [showUnsendOptions, setShowUnsendOptions] = useState(false)
-  const [updated, setUpdated] = useState(chatLog)
 
-console.log(updated)
   const doit = () => {
     setShowUnsendOptions(false)
   }
 
-  const deleteMsg = (id) => {
-    console.log(id)
-    const updatedChatLog = updated.filter((message) => message.id !== id);
-    console.log(updatedChatLog)
+  // const deleteMsg = (id) => {
+  //   console.log(id)
+  //   const updatedChatLog = updated.filter((message) => message.id !== id);
+  //   console.log(updatedChatLog)
     
-    setUpdated(updatedChatLog || [])
+  //   setUpdated(updatedChatLog || [])
+  // };
+  const unsendMessage = (index) => {
+    // Create a copy of the chatLog array
+    const updatedChatLog = [...chatLog];
+
+    // Remove the message at the specified index
+    updatedChatLog.splice(index, 1);
+
+    // Update the chatLog state to reflect the removal
+    // This will cause the component to re-render
+    setChatLog(updatedChatLog);
   };
 
   
     return (
      <div className='chat-container'>
-        {updated.map((message, index) => (
-          <div  onClick={() => deleteMsg(message.id)} className={`message ${index === 0 ? 'first-message' : ''}`} onMouseLeave={doit}>
+        {chatLog.map((message, index) => (
+          <div className={`message ${index === 0 ? 'first-message' : ''}`} onMouseLeave={doit}>
             <div className='edit-txt-btns'>
               <div className={showUnsendOptions ? `unsend-txt-options` : "unsend-txt-options  no-display"}>
                 <ul>
                   <li>Forward</li>
                   <li>Copy</li>
-                  <li>Unsend</li>
+                  <li onClick={() => unsendMessage(index)}>Unsend</li>
                 </ul>
               </div>
               <span onClick={() => setShowUnsendOptions(e => !e)}><BiDotsHorizontalRounded/></span>

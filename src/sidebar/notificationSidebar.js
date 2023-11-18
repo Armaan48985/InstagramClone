@@ -2,7 +2,7 @@
 
 function SearchSidebar({sidebarOpen}) {
   return (
-    <div className='searchsidebar-container' style={sidebarOpen ? { left: "7rem" } : {}}>
+    <div className='searchsidebar-container notify-sidebar' style={sidebarOpen ? { left: "6rem" } : {}}>
         <h2>Notification</h2>
     </div>
   )

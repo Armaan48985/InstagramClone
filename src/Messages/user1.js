@@ -20,7 +20,7 @@ function User1() {
   return (
     <>
       <UserMain id="1" chatLog={chatLog} setChatLog={setChatLog} />
-      <UserChat chatLog={chatLog} />
+      <UserChat chatLog={chatLog} setChatLog={setChatLog} />
     </>
   );
 }

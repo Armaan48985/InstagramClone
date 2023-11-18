@@ -7,12 +7,59 @@ import dummyData from './SearchSidebarData.js'
 function SearchSidebar({sidebarOpen}) {
 
   const [data, setData] = useState(dummyData)
+  const [input, setInput] = useState("");
+  const [results, setResults] = useState([dummyData])
 
   const handleRemove = (id) => {
-  const updatedData = DummyData.filter((item) => item.id !== id);
+    // Use setResults to update the results state
+    setResults((prevResults) => prevResults.filter((item) => item.id !== id));
+  
+    // Also, if you want to remove the item from the data state (dummyData), you can do it like this:
+    // const updatedData = data.filter((item) => item.id !== id);
+    // setData(updatedData);
+  };
 
-  setData(updatedData)
+const fetchData = (value) => {
+  const results = dummyData.filter((user) => {
+    return (
+      value &&
+      user &&
+      user.profileName &&
+      user.profileName.toLowerCase().includes(value.toLowerCase())
+    );
+  });
+
+  if(value == '' || value == null){
+    setResults(dummyData.slice(0,8))
+  }else{
+  setResults(results);
+  }
+
+  console.log(results)
 };
+
+useEffect(() => {
+  if(input == ''){
+    setResults([])
+  }
+},[])
+
+const handleChange = (value) => {
+  console.log(value)
+  setInput(value);
+  fetchData(value);
+};
+
+const clearAll = () => {
+  setResults([])
+}
+
+const clearSearch = () => {
+  setInput("")
+ if(input != ''){
+  setResults(dummyData.slice(0,8))
+ }
+}
 
 
   return (
@@ -20,18 +67,22 @@ function SearchSidebar({sidebarOpen}) {
       <div className='search_upper-section'>
         <h3>Search</h3>
          <div className='search-bar'>
-           <input placeholder='search' />
-            <span className='search-icon'><AiOutlineCloseCircle/></span>
+         <input
+            placeholder="Search"
+            value={input}
+            onChange={(e) => handleChange(e.target.value)}
+          />
+            <span className='search-icon' onClick={clearSearch}><AiOutlineCloseCircle/></span>
           </div>
       </div>
 
       <div className='search_bottom-section'>
           <div className='search_history-buttons'>
             <h4>Recent</h4>
-            <p>Clear All</p>
+            <p onClick={clearAll}>Clear All</p>
           </div>
 
-        {data.map(({username, profileName, imageUrl, id}) => {
+        {results.map(({username, profileName, imageUrl, id}) => {
             return (
               <div className='search_profile-container'>
                 <img src={imageUrl}/>

@@ -1,7 +1,13 @@
 ﻿import {LiaFacebookMessenger} from 'react-icons/lia'
 import React from 'react'
 
-function display({openNewMsgBox}) {
+function display(prop) {
+
+  const {openNewMsgBox} = prop
+
+  const doit = () => {
+    openNewMsgBox()
+  }
   return (
     <div className='message-container'>
     <div className='message-display'>

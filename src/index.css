@@ -663,7 +663,7 @@ h4, h2, h1,h3,h5, p, li{
 
 .saved-txt{
   position: absolute;
-  bottom: 14.3rem;
+  bottom: 10rem;
   left: 1.5rem;
   width: 450px;
   background-color: rgb(0, 0, 0);
@@ -673,8 +673,8 @@ h4, h2, h1,h3,h5, p, li{
   align-items: center;
   padding: 8px;
   transition: .5s;
-  border-left: 1px solid rgb(97, 97, 97);
-  border-right: 1px solid rgb(85, 85, 85);
+  border-left: 1px solid rgb(50, 50, 50);
+  border-right: 1px solid rgb(48, 48, 48);
   border-top: 1px solid rgb(50, 50, 50);
   font-size: 1rem;
 }
@@ -684,8 +684,9 @@ h4, h2, h1,h3,h5, p, li{
 }
 
 .saved-txt span{
-  color: rgb(102, 190, 248);
-  font-weight: 600;
+  color: rgb(0, 132, 255);
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -1609,30 +1610,28 @@ button{
 
 .profile-slider{
   display: flex;
-  position: relative;
+  /* position: relative; */
   margin-top: 3rem;
-  width: 70%; /* Three times the container width to fit three slides */
-  transition: transform 1s; /* 1-second animation duration */
+  width: 100%; /* Three times the container width to fit three slides */
 }
 
 .first-pro-slider{
-  position: absolute;
-  left: -100%;
-  top: 0;
-  /* animation: slide 1s infinite; */
+  display: none;
 }
+
 .second-pro-slider{
-  position: absolute;
-  left: 0;
-  top: 0;
-  animation: slide 1s infinite;
+  display: none;
 }
+
 .third-pro-slider{
-  position: absolute;
-  left: 100%;
-  top: 0;
-  /* animation: slide 1s infinite; */
+  display: none;
 }
+
+.active-slider{
+  display: flex;
+}
+
+
 .slider-container {
   width: 300px; /* Adjust to your preferred slider width */
   height: 200px; /* Adjust to your preferred slider height */
@@ -1671,3 +1670,11 @@ button{
     transform: translateX(0%);
   }
 }
+
+/*  */
+.notify-sidebar{
+  z-index: 99999999999999999999;
+  background-color: green;
+  transform: scaleX(1.08);
+}
+/*  */

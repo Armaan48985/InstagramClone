@@ -26,7 +26,7 @@ function SearchSidebar({ sidebarOpen }) {
   const closeNewMsgBox = () => {
     setNewMsgBox(false)
   }
-
+``
   return (
     <>
     <div style={{display: "none"}}>

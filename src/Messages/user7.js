@@ -20,7 +20,7 @@ function User7() {
       {/* <MessageSidebar/> */}
       <UserMain id="7" chatLog={chatLog} setChatLog={setChatLog} />
       {/* <div className='chat-container'> */}
-      <UserChat chatLog={chatLog} />
+      <UserChat chatLog={chatLog} setChatLog={setChatLog} />
       {/* <h1 className='whitee'>Here</h1> */}
       {/* </div> */}
     </>
