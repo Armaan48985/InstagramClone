@@ -1674,7 +1674,11 @@ button{
 /*  */
 .notify-sidebar{
   z-index: 99999999999999999999;
-  background-color: green;
+  /* background-color: green; */
   transform: scaleX(1.08);
+}
+
+.notify-sidebar h2{
+  margin-left: 1rem;
 }
 /*  */
